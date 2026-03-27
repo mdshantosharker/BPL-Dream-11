@@ -10,7 +10,7 @@ const PlayerCard = ({ player }) => {
           className="w-150 h-64 rounded-2xl"
           src={player.image}
           alt="players"
-          //   class="rounded-xl"
+          
         />
       </figure>
       <div className="card-body ">
