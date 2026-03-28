@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaFlag } from "react-icons/fa";
 
-const PlayerCard = ({ player }) => {
-  // console.log(player.name);
+const PlayerCard = ({ player, setCoin, coin }) => {
+  console.log(player);
+  console.log(coin);
+  const [isSelected, setIsSelected] = useState(false);
+
+  const handleChoose = () => {
+    let newCoin = coin - player.biddingPrice;
+    if (newCoin >= 0) {
+      setCoin(coin - player.biddingPrice);
+    } else {
+      alert("Not enough coin to purchase this player");
+      return;
+    }
+
+    alert(`${player.name} is selected`);
+    setIsSelected(true);
+  };
   return (
     <div className="card bg-base-100  shadow-2xl border-2 border-blue-100 ">
       <figure className="px-10 pt-10">
@@ -10,7 +25,6 @@ const PlayerCard = ({ player }) => {
           className="w-150 h-64 rounded-2xl"
           src={player.image}
           alt="players"
-          
         />
       </figure>
       <div className="card-body ">
@@ -38,7 +52,15 @@ const PlayerCard = ({ player }) => {
             <h1 className="text-[16px] font-semibold">
               Price : $ {player.biddingPrice}
             </h1>
-            <button className="btn hover:bg-[#E7FE29] ">Choose Player</button>
+            <button
+              disabled={isSelected}
+              onClick={() => {
+                handleChoose();
+              }}
+              className={`btn hover:bg-[#E7FE29]  `}
+            >
+              {isSelected ? "Selected" : "Choose Player"}
+            </button>
           </div>
         </div>
       </div>
